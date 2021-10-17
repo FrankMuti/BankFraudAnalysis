@@ -89,7 +89,7 @@ def build_model(data_file):
   print("Done")
 
   print("Metrics")
-  score(y, yhat)
+  score(y_test, yhat)
   print("Done")
   return xgb_boost
 
