@@ -1,7 +1,11 @@
 from rest_framework import serializers
 
-class FileUploadSerializer(serializers.Serializer)
+from .models import File
+
+
+class FileUploadSerializer(serializers.Serializer):
   file = serializers.FileField()
+
 
 class SaveFileSerializer(serializers.Serializer):
   class Meta:
