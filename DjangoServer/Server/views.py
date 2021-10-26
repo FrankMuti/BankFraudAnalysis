@@ -13,9 +13,10 @@ class UploadFileView(generics.CreateAPIView):
   serializer_class = FileUploadSerializer
 
   def post(self, request, *args, **kwargs):
-    serializer = self.get_serializer(data = request.data)
-    serializer.is_valid(raise_exception = True)
-    file = serializer.validated_data['File']
+    serializer = self.get_serializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    print("====>", serializer.validated_data)
+    file = serializer.validated_data['file']
     reader = pd.read_csv(file)
     for _, row in reader.iterrows():
       new_file = File(
