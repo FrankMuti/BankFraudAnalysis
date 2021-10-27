@@ -105,11 +105,9 @@ def build():
 
 
 def main():
-  assert False , "Houston we gotta problem"
   print("========== BUILDER =========")
   print("== GOOD JOB, IT WORKS     ===")
-
-
+  build()
 
 if __name__ == "__main__":
   main()

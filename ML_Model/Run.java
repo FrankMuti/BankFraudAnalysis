@@ -24,10 +24,10 @@ public class Run {
     this.builderScript = "builder.py";
     this.classifyScript = "classify.py";
 
-    this.dataFile = "unset";
-    this.jsonOutFile = "unset";
-    this.scalerFile = "unset";
-    this.classifierFile = "unset";
+    this.dataFile = "data/creditcard.csv";
+    this.jsonOutFile = "data/out.json";
+    this.scalerFile = "static/Scaler.pkl";
+    this.classifierFile = "static/Model.pkl";
   }
 
   public Run(String dataFile, String jsonOutFile, String scalerFile, String classifierFile) {

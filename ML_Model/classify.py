@@ -40,13 +40,22 @@ def run(df_path, sc_path, cl_path):
 
   result = {
     "good": freq[0],
-    "bad": freq[1]
+    "bad": freq[1],
+    "array": y_hat
   }
+  print(result)
   return result
 
 
 def json_file(data, file_name):
-  json.dump(data, open(file_name, 'w'))
+  def default(obj):
+    if type(obj).__module__ == np.__name__:
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        else:
+            return obj.item()
+    raise TypeError('Unknown type:', type(obj))
+  json.dump(data, open(file_name, 'w'), default=default)
   print("Done")
 
 
@@ -89,8 +98,8 @@ def main(argv):
   print(data_set_path, json_out_file, scaler_file_path, classifier_path)
   print("=============================")
   ## Uncomment i production
-  # result = run(data_set_path, scaler_file_path, classifier_path)
-  # json_file(result, json_out_file)
+  result = run(data_set_path, scaler_file_path, classifier_path)
+  json_file(result, json_out_file)
 
 
 if __name__ == "__main__":

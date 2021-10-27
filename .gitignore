@@ -1,4 +1,6 @@
 .idea
 *.csv
+*.json
 *.pdf
+ML_Model/data/*
 #*.pkl
