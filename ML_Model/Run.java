@@ -1,11 +1,16 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Run {
-
   private String dataFile;
   private String jsonOutFile;
   private String scalerFile;
   private String classifierFile;
+
+  private String builderScript;
+  private String classifyScript;
 
   private boolean running;
 
@@ -14,6 +19,10 @@ public class Run {
   public Run() {
     this.running = true;
     this.sc = new Scanner(System.in);
+
+    // hardcoded
+    this.builderScript = "builder.py";
+    this.classifyScript = "classify.py";
   }
 
   public Run(String dataFile, String jsonOutFile, String scalerFile, String classifierFile) {
@@ -24,13 +33,16 @@ public class Run {
     this.classifierFile = classifierFile;
   }
 
-  public void run() {
+  public void run() throws IOException, InterruptedException {
     while (this.running) {
+      System.out.println("============================================");
       System.out.println("Options: ");
       System.out.println("1) Build Model");
       System.out.println("2) Classify Transactions");
       System.out.println("3) Both (1) and (2)");
       System.out.println("4) Exit");
+      System.out.println("===========================================");
+      System.out.print  ("Enter Option: ");
 
       int opt = -1;
 
@@ -42,6 +54,7 @@ public class Run {
       } catch(Exception e) {
         System.out.println("Invalid input. Try again");
       }
+      System.out.println("===========================================");
 
       switch(opt) {
         case 1:
@@ -65,7 +78,26 @@ public class Run {
   }
 
   private void classifyTransaction() {
+    String command = String.format("python %s -d %s", this.classifyScript, this.dataFile);
+    System.out.printf("$ %s\n", command);
+    try {
+      execute(command);
+    } catch (IOException | InterruptedException e) {
+      System.out.println(e.getMessage());
+      System.out.println("Something bad happened");
+    }
+  }
 
+  private void execute(String command) throws IOException, InterruptedException {
+    Process p = Runtime.getRuntime().exec(command);
+    System.out.println("Running....");
+    p.waitFor();
+    BufferedReader bf = new BufferedReader(new InputStreamReader(p.getInputStream()));
+    String tmpLine = "";
+    while ((tmpLine = bf.readLine()) != null) {
+      System.out.println(tmpLine);
+    }
+    bf.close();
   }
 
   private void exit() {
@@ -106,7 +138,23 @@ public class Run {
     this.classifierFile = classifierFile;
   }
 
-  public static void main(String[] args) {
+  public String getBuilderScript() {
+    return builderScript;
+  }
+
+  public void setBuilderScript(String builderScript) {
+    this.builderScript = builderScript;
+  }
+
+  public String getClassifyScript() {
+    return classifyScript;
+  }
+
+  public void setClassifyScript(String classifyScript) {
+    this.classifyScript = classifyScript;
+  }
+
+  public static void main(String[] args) throws IOException, InterruptedException {
     new Run().run();
   }
 }

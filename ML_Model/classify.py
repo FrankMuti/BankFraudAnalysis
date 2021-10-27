@@ -52,8 +52,8 @@ def json_file(data, file_name):
 
 def main(argv):
   def _help():
-    print("python run.py -d [data file] -j [json out file] -s [scaler file] -c [classifier file]")
-    print("python run.py --data=[data file] --json=[json out file] --scaler[scaler file] --class[classifier file]")
+    print("python classify.py -d [data file] -j [json out file] -s [scaler file] -c [classifier file]")
+    print("python classify.py --data=[data file] --json=[json out file] --scaler[scaler file] --class[classifier file]")
   data_set_path = ""
   json_out_file = ""
   scaler_file_path = ""
