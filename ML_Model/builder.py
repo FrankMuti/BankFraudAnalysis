@@ -94,7 +94,7 @@ def build_model(data_file):
   return xgb_boost
 
 
-def main():
+def build():
   file = "data/creditcard.csv"
   model = build_model(file)
   sc = StandardScaler()
@@ -102,6 +102,11 @@ def main():
   dump(sc, open("static/Scaler.pkl", 'wb'))
   dump(model, open("static/Model.pkl", 'wb'))
   print("Done")
+
+
+def main():
+  print("========== BUILDER =========")
+  print("== GOOD JOB, IT WORKS     ===")
 
 
 if __name__ == "__main__":

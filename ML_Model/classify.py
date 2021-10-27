@@ -60,18 +60,18 @@ def main(argv):
   classifier_path = ""
 
   try:
-    option_names = ["data=", "json=", "scaler=", "class="]
-    opts, args = getopt.getopt(argv, "hd:j:s:c", option_names)
+    option_names = ["data=", "json=", "scaler=", "class=", "ten="]
+    opts, args = getopt.getopt(argv, "hd:j:s:c:t", option_names)
   except Exception as e:
     _help()
     print(e)
     sys.exit(2)
 
-  print(opts)
-  if len(opts) < 4 or len(opts) > 4:
+  if len(opts) < 4 or len(opts) > 5:
     _help()
     sys.exit(2)
 
+  print(opts)
   for opt, arg in opts:
     if opt in ("-h", "--help"):
       _help()
@@ -84,8 +84,13 @@ def main(argv):
     elif opt in ("-c", "--class"):
       classifier_path = arg
 
-  result = run(data_set_path, scaler_file_path, classifier_path)
-  json_file(result, json_out_file)
+  print("========== CLASSIFY =========")
+  print("== GOOD JOB, IT WORKS     ===")
+  print(data_set_path, json_out_file, scaler_file_path, classifier_path)
+  print("=============================")
+  ## Uncomment i production
+  # result = run(data_set_path, scaler_file_path, classifier_path)
+  # json_file(result, json_out_file)
 
 
 if __name__ == "__main__":

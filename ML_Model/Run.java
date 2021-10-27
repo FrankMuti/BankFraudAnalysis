@@ -23,6 +23,11 @@ public class Run {
     // hardcoded
     this.builderScript = "builder.py";
     this.classifyScript = "classify.py";
+
+    this.dataFile = "unset";
+    this.jsonOutFile = "unset";
+    this.scalerFile = "unset";
+    this.classifierFile = "unset";
   }
 
   public Run(String dataFile, String jsonOutFile, String scalerFile, String classifierFile) {
@@ -74,11 +79,26 @@ public class Run {
   }
 
   private void buildModel() {
+    String command = String.format("python %s", 
+    this.builderScript);
 
+    System.out.printf("$ %s\n", command);
+    try {
+      execute(command);
+    } catch (IOException | InterruptedException e) {
+      System.out.println(e.getMessage());
+      System.out.println("Something bad happened");
+    }
   }
 
   private void classifyTransaction() {
-    String command = String.format("python %s -d %s", this.classifyScript, this.dataFile);
+    String command = String.format("python %s -d %s -j %s -s %s -c %s -t noth", 
+      this.classifyScript, 
+      this.dataFile,
+      this.jsonOutFile,
+      this.scalerFile,
+      this.classifierFile);
+
     System.out.printf("$ %s\n", command);
     try {
       execute(command);
