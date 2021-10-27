@@ -113,11 +113,16 @@ public class Run {
     System.out.println("Running....");
     p.waitFor();
     BufferedReader bf = new BufferedReader(new InputStreamReader(p.getInputStream()));
+    BufferedReader bfError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
     String tmpLine = "";
     while ((tmpLine = bf.readLine()) != null) {
       System.out.println(tmpLine);
     }
     bf.close();
+    while ((tmpLine = bfError.readLine()) != null) {
+      System.out.println(tmpLine);
+    }
+    bfError.close();
   }
 
   private void exit() {
