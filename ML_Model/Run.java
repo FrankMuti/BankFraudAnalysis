@@ -62,19 +62,28 @@ public class Run {
       System.out.println("===========================================");
 
       switch(opt) {
-        case 1:
-          buildModel();
-          break;
-        case 2:
+        case 1 -> buildModel();
+        case 2 -> classifyTransaction();
+        case 3 -> {
+          buildModel(); 
           classifyTransaction();
-          break;
-        case 3:
-          buildModel();
-          classifyTransaction();
-          break;
-        case 4:
-          exit();
+        }
+        case 4 -> exit();
       }
+      // switch(opt) {
+      //   case 1:
+      //     buildModel();
+      //     break;
+      //   case 2:
+      //     classifyTransaction();
+      //     break;
+      //   case 3:
+      //     buildModel();
+      //     classifyTransaction();
+      //     break;
+      //   case 4:
+      //     exit();
+      // }
     }
   }
 

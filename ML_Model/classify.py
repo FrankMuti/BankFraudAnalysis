@@ -28,8 +28,13 @@ def run(df_path, sc_path, cl_path):
   assert data is not None
 
   ## Load Scaler and classifier
-  sc = pickle.load(open(sc_path, 'rb'))
-  classifier = pickle.load(open(cl_path, 'rb'))
+  f = open(sc_path, 'rb')
+  f.seek(0)
+  sc = pickle.load(f)
+
+  f = open(cl_path, 'rb')
+  f.seek(0)
+  classifier = pickle.load(f)
 
   ## Preprocess
   X_data = preprocess(data, sc)
